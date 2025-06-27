@@ -1,0 +1,86 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+int n;
+class tree{
+    public:
+    int id;
+    tree *lc;
+    tree *rc;
+    
+    public:
+    void accept();
+    void insert(tree *root,tree *newnode);
+    void display(tree *root);
+    
+    
+}*root;
+void tree::accept(){
+    root=new tree;
+    cout<<"enter the id of the student ";
+    cin>>root->id;
+    root->lc=NULL;
+        root->rc=NULL;
+ tree * newnode;
+   int ch;
+   do{
+       cout<<"do you want to add the another student details";
+       cin>>ch;
+   
+     if(ch==1){
+         newnode=new tree;
+        cout<<"enter the id of the student";
+        cin>>newnode->id;
+        newnode->lc=NULL;
+        newnode->rc=NULL;
+        insert(root,newnode);
+    }
+}while(ch==1);
+}
+void tree::insert(tree *root,tree *newnode){
+    cout<<"enter the "<<newnode->id<<"you want to the insert the which side of the "<<root->id;
+char ch;
+cout<<"enter the choice ";
+cin>>ch;
+if(ch=='r' || ch=='R'){
+    if(root->rc==NULL){
+        root->rc=newnode;
+    }
+    else{
+        insert(root->rc,newnode);
+    }
+}
+else{
+    if(root->lc==NULL){
+        root->lc=newnode;
+    }
+    else{
+        insert(root->lc,newnode);
+    }
+}
+}
+void tree::display(tree *root){
+    if(root ==NULL){
+        return ;
+    }
+    display(root->lc);
+    cout<<root->id<<endl;
+    display(root->rc);
+}
+int main() {
+   tree t;
+   int ch;
+   do{
+   cout<<"enter the choice ";
+   cin>>ch;
+   switch(ch){
+      case 1:
+      t.accept();
+      break;
+      case 2:
+      t.display(root);
+   }
+   }while(ch!=3);
+
+    return 0;
+}
